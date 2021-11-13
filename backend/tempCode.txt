@@ -1,0 +1,22 @@
+// router.use(LoginRouter);
+// router.post("/login", validateFields, checkUserExists, async (req, res) => {
+// 	if (!req.userExists) {
+// 		sendErrorResponse(res, "USER_DOES_NOT_EXIST");
+// 	}
+
+// 	const validPassword = await bcrypt.compare(
+// 		req.body.password,
+// 		req.userExists.password
+// 	);
+
+// 	if (validPassword) {
+// 		console.log(req.userExists);
+// 		res.json({
+// 			msg: "PASSWORD_VERIFIED",
+// 			username: req.userExists.username,
+// 			_id: req.userExists._id,
+// 		});
+// 	} else {
+// 		sendErrorResponse(res, "INCORRECT_PASSWORD");
+// 	}
+// });

@@ -1,0 +1,17 @@
+.editor-container{
+	border: 1px solid rgb(0, 17, 255);
+	font-family: $font-roboto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.editor{
+		border: 1px solid red;
+		width: 1000px;
+	}
+
+	.btn-submit{
+		padding: 10px 20px;
+	}
+}

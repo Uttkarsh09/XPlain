@@ -1,0 +1,370 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+.home {
+  text-align: center;
+}
+.home .home-image {
+  width: 500px;
+  border: 1px solid black;
+  margin: 50px auto;
+  border-radius: 15px;
+}
+.home .home-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 80px;
+  max-width: 800px;
+  margin: 150px auto;
+  color: #333131;
+}
+.home .home-text .home-text::selection {
+  background-color: #3399FF;
+  color: white;
+}
+.home .home-text .gradient-text {
+  background-image: linear-gradient(90deg, red, blue);
+  background-clip: text;
+  color: transparent;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px !important;
+}
+.login-container form {
+  border: 1px solid red;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  align-items: center;
+  padding: 50px;
+}
+.login-container form input {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px !important;
+}
+.signup-container form {
+  border: 1px solid red;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  align-items: center;
+  padding: 50px;
+}
+.signup-container form input {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.nav {
+  border: 1px solid red;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+.nav .nav__logo {
+  font-family: "Pacifico", cursive;
+  font-size: 25px;
+  letter-spacing: 1px;
+}
+.nav .open_nav_menu {
+  right: 0 !important;
+}
+.nav .nav__menu {
+  position: relative;
+  border: 1px solid black;
+}
+@media screen and (max-width: 767px) {
+  .nav .nav__menu {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100%;
+    padding: 50px 10px 10px;
+    transition: 0.4s;
+    z-index: 2;
+  }
+}
+.nav .nav__menu .nav__list {
+  list-style-type: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 300px;
+}
+@media screen and (max-width: 767px) {
+  .nav .nav__menu .nav__list {
+    flex-direction: column;
+    row-gap: 20px;
+  }
+}
+.nav .nav__menu .nav__close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .nav .nav__menu .nav__close {
+    display: block;
+  }
+}
+.nav .nav__toggle {
+  cursor: pointer;
+}
+@media screen and (min-width: 767px) {
+  .nav .nav__toggle {
+    display: none;
+  }
+}
+
+.ReactTags :global {
+  /* Example Styles for React Tags*/
+  /* Example Styles for React Tags*/
+  /* Styles for the input */
+  /* Styles for selected tags */
+  /* Styles for suggestions */
+}
+.ReactTags :global .app {
+  padding: 40px;
+  text-align: center;
+}
+.ReactTags :global .container {
+  margin: auto;
+  width: 50%;
+}
+.ReactTags :global .ReactTags__tags {
+  position: relative;
+}
+.ReactTags :global .ReactTags__clearAll {
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+  background: #f88d8d;
+  color: #fff;
+  border: none;
+}
+.ReactTags :global .ReactTags__tagInput {
+  border-radius: 2px;
+  display: inline-block;
+}
+.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField,
+.ReactTags :global .ReactTags__tagInput input.ReactTags__tagInputField:focus {
+  height: 31px;
+  margin: 0;
+  font-size: 12px;
+  border: 1px solid #eee;
+  min-width: 150px;
+}
+.ReactTags :global .ReactTags__editInput {
+  border-radius: 1px;
+}
+.ReactTags :global .ReactTags__editTagInput {
+  display: inline-flex;
+}
+.ReactTags :global .ReactTags__selected span.ReactTags__tag {
+  border: 1px solid #ddd;
+  background: #63bcfd;
+  color: white;
+  font-size: 12px;
+  display: inline-block;
+  padding: 5px;
+  margin: 0 5px;
+  border-radius: 2px;
+}
+.ReactTags :global .ReactTags__selected span.ReactTags__tag:first-child {
+  margin-left: 0px;
+}
+.ReactTags :global .ReactTags__selected a.ReactTags__remove {
+  color: #aaa;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.ReactTags :global .ReactTags__suggestions {
+  position: absolute;
+  top: 60px;
+}
+.ReactTags :global .ReactTags__suggestions ul {
+  list-style-type: none;
+  box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
+  background: white;
+  width: 200px;
+}
+.ReactTags :global .ReactTags__suggestions li {
+  border-bottom: 1px solid #ddd;
+  padding: 5px 10px;
+  margin: 0;
+}
+.ReactTags :global .ReactTags__suggestions li mark {
+  text-decoration: underline;
+  background: none;
+  font-weight: 600;
+}
+.ReactTags :global .ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+  background: #b7cfe0;
+  cursor: pointer;
+}
+.ReactTags :global .ReactTags__remove {
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: white;
+}
+
+.editor-container {
+  border: 1px solid #0011ff;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.editor-container .editor {
+  border: 1px solid red;
+  width: 1000px;
+}
+.editor-container .btn-submit {
+  padding: 10px 20px;
+}
+
+.user-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  min-height: 500px;
+  flex-direction: column;
+  row-gap: 30px;
+  border: 1px solid black;
+  border-radius: 45px;
+  padding: 20px 0px;
+}
+.user-profile .profile-photo {
+  display: flex;
+  justify-content: center;
+  border: 1px solid red;
+  height: 90px;
+  width: 90px;
+}
+.user-profile .user-info-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  font-family: "Ubuntu", sans-serif;
+}
+.user-profile .user-info-list .user-info {
+  list-style: none;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px 20px;
+  width: 280px;
+  row-gap: 10px;
+}
+.user-profile .user-info-list .user-info .tag {
+  margin-right: 10px;
+  font-size: 13px;
+  color: #636363;
+  font-weight: 700;
+}
+.user-profile .user-info-list .user-info .data {
+  font-weight: 700;
+  font-size: 20px;
+}
+.user-profile .user-info-list .follow-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px 20px;
+}
+.user-profile .user-info-list .follow-info .follow-head {
+  background-color: lightcoral;
+  text-align: center;
+  padding: 7px 15px;
+  border-radius: 10px;
+}
+.user-profile .user-info-list .follow-info .follow-head .follow-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: #FCC9C9;
+}
+.user-profile .user-info-list .follow-info .follow-head .follow-data {
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+}
+.user-profile .user-info-list .liked-blogs {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+.user-profile .user-info-list .liked-blogs:hover {
+  cursor: pointer;
+}
+.user-profile .action-btns .btn-edit, .user-profile .action-btns .btn-logout {
+  width: 150px;
+  height: 40px;
+  border-radius: 40px;
+  font-weight: 700;
+  margin: 5px;
+}
+.user-profile .action-btns .btn-edit:hover, .user-profile .action-btns .btn-logout:hover {
+  cursor: pointer;
+}
+.user-profile .action-btns .btn-edit {
+  border: 1px solid black;
+  background-color: white;
+}
+.user-profile .action-btns .btn-edit:hover {
+  background-color: #e9e9e9;
+}
+.user-profile .action-btns .btn-logout {
+  border: none;
+  background-color: #FF3C3C;
+  color: white;
+}
+.user-profile .action-btns .btn-logout:hover {
+  border: 1px solid #FF3C3C;
+  background-color: #d30000;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/*# sourceMappingURL=style.css.map */

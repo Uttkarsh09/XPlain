@@ -1,0 +1,47 @@
+// The styling is same just splitted for future ease.
+
+.login-container{
+    // border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px !important;
+
+    form{
+        border: 1px solid red;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        align-items: center;
+        padding: 50px;
+
+        input{
+            width: 200px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.signup-container{
+    // border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px !important;
+    
+    form{
+        border: 1px solid red;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        align-items: center;
+        padding: 50px;
+
+        input{
+            width: 200px;
+            margin-bottom: 20px;
+        }
+    }
+}

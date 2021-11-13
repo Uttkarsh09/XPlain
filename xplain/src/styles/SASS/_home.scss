@@ -1,0 +1,33 @@
+@import "./fonts";
+@import "./variables";
+
+.home{
+  text-align: center;
+
+	.home-image{
+		width: 500px;
+		border: 1px solid rgb(0, 0, 0);
+		margin: 50px auto;
+		border-radius: 15px;
+	}
+	
+	.home-text{
+		font-family: $font-roboto;
+		font-weight: 900;
+		font-size: 80px;
+		max-width: 800px;
+		margin: 150px auto;
+		color: rgb(51, 49, 49);
+	
+		.home-text::selection{
+			background-color: #3399FF;
+			color: white;
+		}
+
+		.gradient-text{
+      		@include generateGradient(90deg, red, blue);
+			background-clip: text;
+			color: transparent;
+		}
+	}
+}
