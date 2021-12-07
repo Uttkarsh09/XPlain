@@ -5,16 +5,25 @@ import { Provider } from "react-redux";
 import store from "./Components/Store/store";
 import Routes from "./Routes";
 import "./styles/CSS/style.css";
+import { ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-	
 	return (
-		<Provider store={store}>
-			<BrowserRouter>
-				<NavigationBar />
-				<Routes />
-			</BrowserRouter>
-		</Provider>
+		<>
+			<Provider store={store}>
+				<BrowserRouter>
+					<NavigationBar />
+					<Routes />
+				</BrowserRouter>
+				<ToastContainer
+					position="top-center"
+					autoClose="2000"
+					transition={Slide}
+					pauseOnHover={true}
+				/>
+			</Provider>
+		</>
 	);
 }
 

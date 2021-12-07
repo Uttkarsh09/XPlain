@@ -1,7 +1,8 @@
-
 .nav{
-	border: 1px solid red;
-	height: 55px;
+	// border: 1px solid black;
+	background-color: #fcd2b4;
+	border-radius: 0px 0px 20px 20px;
+	height: $nav-bar-height;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -19,7 +20,7 @@
 
 	.nav__menu{
 		position: relative;
-        border: 1px solid black;
+        // border: 1px solid black;
 
 		@media screen and (max-width: 767px) {
 			background-color: white;
@@ -42,12 +43,21 @@
 			display: flex;
             align-items: center;
             justify-content: space-evenly;
-            width: 300px;
-			
+			width: 300px;
+
 			@media screen and (max-width: 767px) {
 				flex-direction: column;
 				row-gap: 20px;
+				width: 100%;
 			}
+		}
+
+		.profile-photo{
+			height: 35px;
+			width: 35px;
+			border-radius: 50%;
+			object-fit: cover;
+			object-position: 50% 10%;
 		}
 
 		.nav__close{

@@ -8,9 +8,12 @@ import Signup from "./Components/Signup";
 import axios from "axios";
 import Loading from "./Components/Loading";
 import UserProfile from "./Components/UserProfile";
+import Blog from "./Components/Blog";
 import { Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { update } from "./Components/Store/Slices/UserSlice";
+import { addUserInfo } from "./Components/Store/Slices/UserSlice";
+import { toast } from "react-toastify";
+// import { UserProfileProvider } from "./Components/Context/UserProfileContext";
 
 function Routes() {
 	const dispatch = useDispatch();
@@ -19,7 +22,7 @@ function Routes() {
 	useEffect(() => {
 		axios
 			.post(
-				"http://localhost:9000/autoLogin",
+				"http://localhost:9000/login",
 				{
 					/* No Data */
 				},
@@ -28,15 +31,19 @@ function Routes() {
 			.then((res) => {
 				console.log("Logged in with existing session");
 				dispatch(
-					update({ userId: res.data.userId, username: res.data.username })
+					addUserInfo({
+						userId: res.data.userId,
+						username: res.data.username,
+						profilePhoto: res.data.defaultProfilePhoto,
+					})
 				);
 			})
 			.catch((err) => {
-				console.log(err)
 				if (err.response.data.errorMsg === "SESSION_NOT_FOUND") {
 					console.log("Session not found");
 				} else {
-					console.log("THROWING RNDM ERROR");
+					toast.error("ERROR FROM ROUTES.JSX");
+					console.log("ERROR FROM ROUTES.JSX");
 					throw err;
 				}
 			})
@@ -50,11 +57,12 @@ function Routes() {
 			{userFound ? (
 				<Switch>
 					<Route exact path={["/home", "/"]} component={Home} />
-					<Route exact path="/edit" component={Editor} />
-					<Route exact path="/blogs" component={BlogLibrary} />
+					<Route exact path="/write" component={Editor} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/signup" component={Signup} />
-					<Route exact path="/userProfile/:username" component={UserProfile} />
+					<Route exact path="/user-profile/:username" component={UserProfile} />
+					<Route exact path="/blog-library" component={BlogLibrary} />
+					<Route exact path="/blogs/:blogId" component={Blog} />
 					<Route path="/" component={NotFound404} />
 				</Switch>
 			) : (

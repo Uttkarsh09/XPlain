@@ -1,14 +1,12 @@
-@import "./fonts";
-@import "./variables";
 
 .home{
-  text-align: center;
+  	text-align: center;
 
 	.home-image{
 		width: 500px;
 		border: 1px solid rgb(0, 0, 0);
 		margin: 50px auto;
-		border-radius: 15px;
+		border-radius: $border-radius;
 	}
 	
 	.home-text{

@@ -11,29 +11,27 @@ import Table from "@editorjs/table";
 import Underline from "@editorjs/underline";
 
 const initialData = {
-	time: 1632755414969,
+	time: 1638893109039,
 	blocks: [
 		{
-			id: "NbiQX12A3K",
+			id: "Be74ezWlbK",
 			type: "header",
 			data: {
-				text: "Editor.js",
+				text: "Points to keep in mind while writing the blog :",
 				level: 2,
 			},
 		},
 		{
-			id: "7Ci0ofrCUq",
-			type: "paragraph",
+			id: "HjyRMQw0CB",
+			type: "list",
 			data: {
-				text: "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text.",
-			},
-		},
-		{
-			id: "gkMgInaNfE",
-			type: "header",
-			data: {
-				text: "Key features",
-				level: 1,
+				style: "ordered",
+				items: [
+					"Keep it simple.",
+					"Cover all the points to be xplained by the topic.",
+					"Use white spaces.",
+					"Read before publishing.",
+				],
 			},
 		},
 	],

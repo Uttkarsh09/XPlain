@@ -1,14 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { X, Menu } from "react-feather";
-import { userInfo } from "./Store/Slices/UserSlice";
-import { useSelector } from "react-redux";
+import useUserInfo from "./Utilities/useUserInfo";
+import DisplaySvg from "./Utilities/DisplaySvg";
 
 function NavigationBar() {
 	const navMenuRef = useRef();
-	const user = useSelector(userInfo);
+	const user = useUserInfo();
 
 	function onCloseClick() {
 		navMenuRef.current.classList.remove("open_nav_menu");
@@ -19,7 +18,7 @@ function NavigationBar() {
 	}
 
 	return (
-		<nav className="nav container">
+		<nav className="nav ">
 			<Link to="/" className="nav__logo">
 				XPlain
 			</Link>
@@ -37,16 +36,7 @@ function NavigationBar() {
 					</li>
 					<li className="nav__items">
 						<Link
-							to="/edit"
-							onClick={onCloseClick}
-							className="nav__link active-link"
-						>
-							About
-						</Link>
-					</li>
-					<li className="nav__items">
-						<Link
-							to="/blogs"
+							to="/blog-library"
 							onClick={onCloseClick}
 							className="nav__link active-link"
 						>
@@ -55,14 +45,31 @@ function NavigationBar() {
 					</li>
 					<li className="nav__items">
 						<Link
-							to={user.username ? `/userProfile/${user.username}` : "/login"}
+							to="/write"
 							onClick={onCloseClick}
 							className="nav__link active-link"
 						>
-							<img
-								src="profile.svg"
-								style={{ height: 40, width: 40, borderRadius: "50%" }}
-							/>
+							Write
+						</Link>
+					</li>
+					<li className="nav__items">
+						<Link
+							to={user.username ? `/user-profile/${user.username}` : "/login"}
+							onClick={onCloseClick}
+							className="nav__link active-link"
+						>
+							{user.profilePhoto ? (
+								<DisplaySvg
+									svgString={user.profilePhoto}
+									className="profile-photo"
+								/>
+							) : (
+								<img
+									src={window.location.origin + "/defaultProfile.png"}
+									className="profile-photo"
+									style={{ objectFit: "cover", objectPosition: "55% 100%" }}
+								/>
+							)}
 						</Link>
 					</li>
 				</ul>

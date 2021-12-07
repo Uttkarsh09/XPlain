@@ -1,7 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+//Component Dimentions
+$nav-bar-height: 55px;
+$border-radius: 10px;
+$border-radius-large: 50px;
+
+// Fonts
+$font-roboto: 'Roboto', sans-serif;
+$font-pacifico: 'Pacifico', cursive;
+$font-ubuntu: 'Ubuntu', sans-serif;
+
 // SIZE
-$small-screen: 400px;
-$medium-screen: 700px;
-$large-screen: 950px;
+$extra-small-screen: 400px;
+$small-screen: 600px;
+$medium-screen: 786px;
+$large-screen: 992px;
+$extra-large-screen: 1200px;
+
+//Colors
+$login-signup-button-color: rgb(255, 60, 60);
 
 // GRADIENT
 @mixin generateGradient($degree, $color1, $color2){

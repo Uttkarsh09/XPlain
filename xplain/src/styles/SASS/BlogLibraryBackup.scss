@@ -1,0 +1,177 @@
+/*
+    $small: 600px;
+    $medium: 786px;
+    $large: 992px;
+    $extra-large: 1200px;
+*/
+
+.blog-liberary{
+    border: 1px solid rebeccapurple;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    :hover{
+        cursor: pointer;
+    }
+
+    @media (max-width: $small-screen){
+        padding: 10px;
+    }
+
+    h1{
+        margin-bottom: 30px;
+        font-family: $font-ubuntu;
+        font-size: 70px;
+        text-align: center;
+        // border: 1px solid red;
+        
+        @media (max-width: $medium-screen){
+            font-size: 60px;
+        }
+
+        @media (max-width: $small-screen){
+            margin-top: 20px;
+            font-size: 45px;
+        }
+    }
+    
+    .blog-block{    
+        border: 1px solid black;
+        border-radius: $border-radius;
+        width: 75%;
+        min-height: 175px;
+        margin-bottom: 30px;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas: "blog-info blog-image";
+
+        @media (max-width: $medium-screen){
+            height: 30px;
+            width: 85%;
+        }
+
+        @media (max-width: $small-screen){
+            width: 100%;
+        }
+        
+        .blog-info{
+            grid-area: blog-info;
+            // border: 1px solid red;
+            border-radius: $border-radius 0px 0px $border-radius; // starts from top left -> top right -> bottom right ...
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            font-family: $font-ubuntu;
+            padding: 10px;
+
+            .blog-title{
+                font-size: 25px;
+                left: 20px;
+                top: 20px;
+                // margin: 10px;
+
+                @media (max-width: $medium-screen) {
+                    font-size: 23px;
+                }
+                @media (max-width: $small-screen) {
+                    font-size: 18px;
+                }
+                @media (max-width: $extra-small-screen){
+                    font-size: 16px;
+                }
+            }
+
+            .blog-author{
+                display: flex;
+                justify-content: flex-end;
+                padding-right: 10px;
+                color: rgb(107, 107, 107);
+                font-size: 17px;
+                // border: 1px solid black;
+                
+                @media (max-width: $extra-small-screen){
+                    font-size: 14px;
+                }
+            }
+
+            .blog-stats{
+                color: rgb(107, 107, 107);
+                font-weight: 500;
+                display: flex;
+                position: absolute;
+                bottom: 15px;
+                left: 15px;
+
+                span{
+                    margin-right: 10px;
+                    .icon{
+                        position: relative;
+                        top: 1px;
+                    }
+                }
+            }
+        }
+
+        .blog-image{
+            grid-area: blog-image;
+            border-radius: 0px $border-radius $border-radius 0px;
+            
+            img{
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 0px $border-radius $border-radius 0px;
+            }
+        }
+    }
+}
+
+
+// ------ RESPONSIVENESS SECTION ------
+
+// @media (max-width: 650px){
+//     .blog-block{
+//         height: 100px;
+//         border: 1px solid orange;
+//         grid-template-areas: 
+//             "blog-image"
+//             "blog-info";
+//         grid-template-columns: auto;
+//         grid-template-rows: 20% 80%;
+//         width: 90%;
+//     }
+// }
+
+// .blog-liberary{
+//     @media (max-width: 650px){
+//         padding: 10px;
+//     }
+
+//     .blog-block{
+//         @media (max-width: 850px){
+//             width: 90%;
+//         }
+        
+//         .blog-info{
+//             @media (max-width: 650px){
+//                 border-radius: 0px 0px $border-radius $border-radius;
+//             }
+
+//             .blog-title{
+                
+//             }
+//             .blog-author{}
+//             .blog-stats{}
+//         }
+
+//         .blog-image{
+//             @media (max-width: 650px){
+//                 
+//             }
+//         }
+//     }
+// }

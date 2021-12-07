@@ -2,11 +2,19 @@
 import React, { useState, useEffect } from "react";
 import Loading from "./Loading";
 import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
+import { removeUserInfo } from "./Store/Slices/UserSlice";
+import { useDispatch } from "react-redux";
+import DisplaySvg from "./Utilities/DisplaySvg";
+import { AlertCircle } from "react-feather";
+import EditData from "./EditData";
+import useUserInfo from "./Utilities/useUserInfo";
+import { toast } from "react-toastify";
 
 function UserProfile({ match }) {
 	const username = match.params.username;
-	const name = "UTTKARSH";
-	const [userExists, setUserExists] = useState(true);
+	const [user, setUser] = useState(false);
+	const [editUserData, setEditUserData] = useState(false);
 
 	useEffect(() => {
 		axios
@@ -14,25 +22,83 @@ function UserProfile({ match }) {
 				username,
 			})
 			.then((res) => {
-				console.log(res);
+				res = res.data;
+				setUser(res);
 			})
 			.catch((err) => {
 				console.log(err.response);
+				if (err.response.data.errorMsg === "USER_DOES_NOT_EXIST") {
+					// console.log(err.response.data);
+					setUser("USER_DOES_NOT_EXIST");
+				} else {
+					console.log("There was an unknown error while retreving userInfo");
+					console.log(err);
+				}
 			});
 	}, [username]);
 
-	return <>{userExists ? <Profile {...{ name, username }} /> : <Loading />}</>;
+	return (
+		<>
+			{editUserData && <EditData {...user} setEditUserData={setEditUserData} />}
+			{!editUserData && user ? (
+				user === "USER_DOES_NOT_EXIST" ? (
+					<UserNotFound />
+				) : (
+					<Profile {...user} setEditUserData={setEditUserData} />
+				)
+			) : (
+				<Loading />
+			)}
+		</>
+	);
 }
 
-function Profile({ name, username, followers, following }) {
-	followers = 69;
-	following = 69;
-	username = "upatel";
+function Profile({
+	name,
+	username,
+	followers,
+	following,
+	defaultProfilePhoto,
+	setEditUserData,
+}) {
+	name = name.charAt(0).toUpperCase() + name.substr(1);
+	const history = useHistory();
+	const user = useUserInfo();
+	const dispatch = useDispatch();
+	let profilePhoto = "";
+	const userCanEdit = user.username === username; // user.username is the logged-in username and other is the searched one
+	if (userCanEdit) {
+		profilePhoto = user.profilePhoto;
+	} else {
+		profilePhoto = defaultProfilePhoto;
+	}
+
+	function logout() {
+		axios
+			.post("http://localhost:9000/logout", {}, { withCredentials: true })
+			.then((_) => {
+				console.log("Removing user info from redux state");
+				dispatch(removeUserInfo());
+				history.push("/");
+			})
+			.catch((err) => {
+				console.log("Error while logging out");
+				console.log(err.response);
+			});
+	}
 
 	return (
 		<div className="user-profile container">
-			<div className="profile-photo">
-				<img src="./profile.svg" alt="user profile" />
+			<div>
+				{profilePhoto ? (
+					<DisplaySvg className="profile-photo" svgString={profilePhoto} />
+				) : (
+					<img
+						src={window.location.origin + "/profile.svg"}
+						className="profile-photo"
+						alt=""
+					/>
+				)}
 			</div>
 
 			<ul className="user-info-list">
@@ -57,13 +123,40 @@ function Profile({ name, username, followers, following }) {
 						<div className="follow-data">{following}</div>
 					</div>
 				</li>
-				<li className="user-info liked-blogs">VIEW LIKED BLOGS</li>
+				<li
+					className="user-info liked-blogs"
+					onClick={() => toast.warn("This feature is currently unavailable")}
+				>
+					<span>VIEW {userCanEdit ? "YOUR" : "THEIR"} BLOGS</span>
+				</li>
 			</ul>
 
-			<div className="action-btns">
-				<button className="btn-edit">EDIT</button>
-				<button className="btn-logout">LOGOUT</button>
-			</div>
+			{userCanEdit ? (
+				<div className="action-btns">
+					<button
+						className="btn-edit"
+						id="btn-edit"
+						onClick={() => setEditUserData(true)}
+						// onClick={() => history.push(`/edit-user/${username}`)}
+					>
+						EDIT ✏️
+					</button>
+					<button className="btn-logout" onClick={logout}>
+						LOGOUT 👋
+					</button>
+				</div>
+			) : (
+				""
+			)}
+		</div>
+	);
+}
+
+function UserNotFound() {
+	return (
+		<div className="user-not-found container">
+			<AlertCircle color="red" size={150} />
+			<div>User Not Found</div>
 		</div>
 	);
 }

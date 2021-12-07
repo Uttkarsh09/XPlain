@@ -1,21 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import EditorJS from "@editorjs/editorjs";
 import { EDITOR_JS_TOOLS, initialData } from "./editorTools";
-import { changeTitle } from "../../scripts/general";
 import uploadBlog from "./upload";
-import { useSelector } from "react-redux";
-import { userInfo } from "../Store/Slices/UserSlice";
+import useUserInfo from "../Utilities/useUserInfo";
 import ReactTag from "./KeywordTags";
-
-function validateFields(title, readingTime, userId) {}
+import {
+	validateEditorFields,
+	addReadingTimeListener,
+} from "../Utilities/validation";
+import { toast } from "react-toastify";
+import useChangeTitle from "../Utilities/useChangeTitle";
 
 const Editor = ({ history }) => {
 	const [editor, setEditor] = useState();
 	const holder = "editorjs";
 	const titleRef = useRef();
 	const readingTimeRef = useRef();
-	const user = useSelector(userInfo);
+	const user = useUserInfo();
 	let keywordTags = [];
 
 	function setKeywordTags(tags) {
@@ -27,23 +29,15 @@ const Editor = ({ history }) => {
 
 	function onPublish(e) {
 		e.preventDefault();
+
 		editor.save().then((output) => {
 			const title = titleRef.current.value.trim();
 			const readingTime = readingTimeRef.current.value.trim();
 
-			if (title === "") {
-				alert("Enter a title");
-				return;
-			}
-			if (readingTime === "") {
-				alert("Enter a reading time");
-				return;
-			}
-
-			if (user.userId === undefined) {
-				alert("LOGIN FIRST");
-				history.push("/login");
-				return;
+			const validFields = validateEditorFields(title, readingTime);
+			if (!validFields.valid) {
+				toast.error(validFields.message.toUpperCase());
+				return false;
 			}
 
 			uploadBlog({
@@ -52,41 +46,68 @@ const Editor = ({ history }) => {
 				content: output,
 				keywords: keywordTags,
 				readingTime: parseInt(readingTime),
-				title: title,
-			}).then((res) => {
-				alert("Blog uploaded");
-				history.push("/blogs");
+				title,
+			}).then(() => {
+				toast.success("Blog uploaded", {
+					onClose: () => {
+						history.push("/blog-library");
+					},
+				});
 			});
 		});
 	}
 
-	useLayoutEffect(() => changeTitle("XPlain • Editor"), []);
+	useChangeTitle("Editor");
 
 	useEffect(() => {
-		const editorSettings = new EditorJS({
+		if (user.userId === undefined) {
+			toast.warn("IN ORDER TO UPLOAD A BLOG, YOU NEED TO LOG-IN", {
+				onClose: () => {
+					history.push("/login");
+				},
+			});
+			return;
+		}
+		const editorConfig = new EditorJS({
 			holder: holder,
 			autofocus: false,
 			tools: EDITOR_JS_TOOLS,
 			data: initialData,
 			logLevel: "INFO",
 		});
-		setEditor(editorSettings);
-	}, []);
+		setEditor(editorConfig);
+		addReadingTimeListener();
+	}, [user.userId, history]);
 
 	useEffect(() => {
 		if (editor) titleRef.current.focus();
 	}, [editor]);
 
 	return (
-		<form className="editor-container" onSubmit={onPublish}>
-			<div>
-				<input type="text" placeholder="Blog Title" ref={titleRef} />
-				<input type="number" placeholder="Reading Time" ref={readingTimeRef} />
+		<form className="container editor-container" onSubmit={onPublish}>
+			<div className="editor-inputs">
+				<textarea
+					type="text"
+					className="blog-title-input texta"
+					placeholder="Title"
+					autoComplete="off"
+					ref={titleRef}
+				/>
+				<div>
+					<span>Estimated reading time </span>
+					<input
+						className="reading-time-input"
+						placeholder="00"
+						type="number"
+						ref={readingTimeRef}
+					/>
+					<span> minutes</span>
+				</div>
 			</div>
-			<ReactTag {...{ setKeywordTags }} />
+			{/* <ReactTag {...{ setKeywordTags }} /> */}
 			<div id={holder} className="editor"></div>
 			<div>
-				<input className="btn-submit" type="submit" value="PUBLISH" />
+				<input className="btn-submit" type="submit" value="PUBLISH 📝" />
 			</div>
 		</form>
 	);

@@ -1,10 +1,9 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
+import useChangeTitle from "./Utilities/useChangeTitle";
 // import "../styles/Home/home.css";
 
 function Home() {
-	useLayoutEffect(() => {
-		document.title = "XPlain • Home";
-	});
+	useChangeTitle("Home");
 
 	return (
 		<div className="home container">

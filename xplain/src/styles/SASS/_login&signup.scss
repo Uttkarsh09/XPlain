@@ -1,47 +1,111 @@
 // The styling is same just splitted for future ease.
+@import "./variables";
 
 .login-container{
-    // border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 100px !important;
+    height: calc(100vh - $nav-bar-height);
 
     form{
-        border: 1px solid red;
-        height: 200px;
+        width: 450px;
         display: flex;
         flex-direction: column;
-        width: 400px;
         align-items: center;
-        padding: 50px;
+        row-gap: 20px;
+        padding: 70px;
+        border-radius: 10px;
+        font-family: $font-roboto;
+        box-shadow:
+            0px 9.1px 5.7px rgba(0, 0, 0, 0.056),
+            0px 17.7px 14.3px rgba(0, 0, 0, 0.074),
+            0px 27.9px 29.2px rgba(0, 0, 0, 0.084),
+            0px 46.6px 60.2px rgba(0, 0, 0, 0.088),
+            0px 102px 165px rgba(0, 0, 0, 0.09)
+            ;
 
-        input{
-            width: 200px;
-            margin-bottom: 20px;
+        .logo{
+            font-family: $font-pacifico !important;
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .custom-input{
+            --fancy-input-size: 20px;
+            --fancy-input-starting-font-size: 20px;
+            --fancy-input-ending-font-size: 14px;
+            --fancy-input-font-color: #FF3C3C;
+        }
+
+        input[type="submit"]{
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: $login-signup-button-color;
+            border: none;
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 700;
+            color: white;
+
+            &:hover{
+                cursor: pointer;
+                background-color: mix($login-signup-button-color, rgb(0,0,0), 85%);
+            }
         }
     }
 }
 
 .signup-container{
-    // border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 100px !important;
-    
+    height: calc(100vh - $nav-bar-height);
+
     form{
-        border: 1px solid red;
-        height: 200px;
+        width: 450px;
         display: flex;
         flex-direction: column;
-        width: 400px;
         align-items: center;
-        padding: 50px;
+        row-gap: 20px;
+        padding: 70px;
+        border-radius: 10px;
+        font-family: $font-roboto;
+        box-shadow:
+            0px 9.1px 5.7px rgba(0, 0, 0, 0.056),
+            0px 17.7px 14.3px rgba(0, 0, 0, 0.074),
+            0px 27.9px 29.2px rgba(0, 0, 0, 0.084),
+            0px 46.6px 60.2px rgba(0, 0, 0, 0.088),
+            0px 102px 165px rgba(0, 0, 0, 0.09)
+            ;
 
-        input{
-            width: 200px;
-            margin-bottom: 20px;
+        .logo{
+            font-family: $font-pacifico !important;
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .custom-input{
+            --fancy-input-size: 20px;
+            --fancy-input-starting-font-size: 20px;
+            --fancy-input-ending-font-size: 14px;
+            --fancy-input-font-color: #FF3C3C;
+        }
+
+        input[type="submit"]{
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: $login-signup-button-color;
+            border: none;
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 700;
+            color: white;
+
+            &:hover{
+                cursor: pointer;
+                background-color: mix($login-signup-button-color, rgb(0,0,0), 85%);
+            }
         }
     }
+
 }

@@ -1,17 +1,97 @@
 .editor-container{
-	border: 1px solid rgb(0, 17, 255);
+	// border: 1px solid rgb(0, 17, 255);
 	font-family: $font-roboto;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	padding-bottom: 0px;
+
+	.editor-inputs{
+		// border: 1px solid black;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		flex-direction: column;
+		width: 100%;
+		gap: 10px;
+		padding: 10px;
+
+		
+		.blog-title-input{
+			text-align: center;
+			padding: 5px;
+			font-family: $font-roboto;
+			word-spacing: 2px;
+			font-size: 40px;
+			font-weight: 700;
+			outline: none;
+			border-radius: 5px;
+			width: 80%;
+			min-height: 61px;
+			border: 2px solid black;
+			overflow-x: hidden;
+			overflow-y: auto;
+			resize: vertical;
+			
+			.blog-title-input::placeholder{
+				color: rgb(165, 164, 164);
+			}
+			
+			@media (max-width: $small-screen) {
+				width: 95%;
+				font-size: 27px;
+			}
+		}
+
+		.reading-time-input{
+			outline: none;
+			border: 2px solid black;
+			border-radius: 5px;
+			padding: 2px;
+			width: 5.5%;
+			text-align: center;
+			-moz-appearance: textfield;
+			
+			@media (max-width: $small-screen) {
+				width: 6%;
+			}
+		}
+		.reading-time-input::-webkit-outer-spin-button,
+		.reading-time-input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+  			margin: 0;
+		}
+
+	}
 
 	.editor{
-		border: 1px solid red;
-		width: 1000px;
+		border: 1px solid black;
+		margin-top: 20px;
+		border-radius: $border-radius;
+		width: 80%;
+		padding: 20px;
+
+		@media (max-width: $small-screen) {
+			width: 95%;
+			padding: 10px;
+		}
 	}
 
 	.btn-submit{
-		padding: 10px 20px;
+		padding: 15px 35px;
+		color: rgb(151, 75, 3);
+		border: none;
+		background-color: rgb(252, 212, 173);
+		font-weight: 700;
+		font-size: 16px;
+		border-radius: 100px;
+		margin: 40px;
+
+		&:hover{
+			cursor: pointer;
+			background-color: rgb(151, 75, 3);
+			color: rgb(252, 212, 173);
+		}
 	}
 }

@@ -1,0 +1,95 @@
+.blog{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 2rem;
+	font-family: $font-roboto;
+    // background-color: #faf2ed;
+    border-radius: 20px;
+
+    @media (max-width: $small-screen){
+        row-gap: 1em;
+        margin-top: 0px !important;
+    }
+    @media (max-width: $medium-screen){
+        margin-top: 20px !important;
+    }
+    @media (min-width: $medium-screen){
+        margin-top: 40px !important;
+    }
+
+    .blog-header{
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        row-gap: 10px;
+        width: 80%;
+        // background-color: #f5dacc;
+        padding: 20px;
+        border-radius: 20px;
+
+        @media (max-width: $medium-screen){
+            width: 90%;
+        }
+
+        @media (max-width: $small-screen){
+            width: 95%;
+            padding: 10px;
+        }
+
+        .blog-title{
+            font-size: 35px;
+            font-family: $font-roboto;
+            font-weight: 700;
+            padding-left: 0px;
+            
+            @media (max-width: $small-screen){
+                margin-top: 0px;
+                font-size: 25px;    
+            }
+        }
+
+        .blog-metadata{
+            // border: 1px solid black;
+            display: flex;
+            column-gap: 15px;
+            align-items: center;
+            width: 100%;
+            font-weight: 400;
+            padding-left: 20px;
+
+        @media (max-width: $small-screen){
+            padding-left: 0px;
+        }
+
+            .author-profile{
+                display: flex;
+                align-items: center;
+                
+                .author-image{
+                    border-radius: 50%;
+                    height: 30px;
+                    width: 30px;
+                    margin-right: 5px;
+                }
+            }
+        }
+
+    }
+
+    .editor{
+		// border: 1px solid red;
+		border-radius: $border-radius;
+		width: 90%;
+		padding: 10px 0px;
+        padding-bottom: -200px;
+
+		@media (max-width: $small-screen) {
+			width: 100%;
+			padding: 0 10px;
+            font-size: 15px;
+		}
+	}
+
+}

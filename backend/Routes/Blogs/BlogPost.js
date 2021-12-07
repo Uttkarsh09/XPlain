@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const router = express.Router();
 const BlogModel = require("../../Model/BlogModel");
 
@@ -23,6 +22,7 @@ router.post("/post", async (req, res) => {
 			.status(200)
 			.json({ msg: "UPLOADED", uploadedBlogID: uploadedBlog["_id"] });
 	} catch (err) {
+		sendErrorResponse(res, "BLOG_NOT_UPLOADED");
 		res.json({ msg: "ERROR", err });
 	}
 });

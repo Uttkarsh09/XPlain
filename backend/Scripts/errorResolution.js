@@ -1,18 +1,22 @@
 const errorCodes = {
-	USERNAME_ALREADY_PRESENT: 6901,
-	USERNAME_INVALID: 6902,
-	INCORRECT_CREDENTIALS: 6903,
-	INCORRECT_PASSWORD: 6904,
-	USER_DOES_NOT_EXIST: 6905,
-	CANNOT_LOGIN: 6906,
-	SESSION_NOT_FOUND: 6907,
+	USERNAME_ALREADY_PRESENT: 1,
+	USERNAME_INVALID: 2,
+	INCORRECT_CREDENTIALS: 3,
+	INCORRECT_PASSWORD: 4,
+	USER_DOES_NOT_EXIST: 5,
+	CANNOT_LOGIN: 6,
+	SESSION_NOT_FOUND: 7,
+	BLOG_NOT_RETRIEVED: 8,
+	BLOG_NOT_UPLOADED: 9,
+	BLOG_NOT_UPDATED: 10,
+	USER_NOT_DELETED: 11,
 };
 
 function sendErrorResponse(res, errorMsg, statusCode = 500) {
 	try {
 		res
 			.status(statusCode)
-			.json({ errorCode: errorCodes[errorMsg], errorMsg: "SESSION_NOT_FOUND" });
+			.json({ errorCode: errorCodes[errorMsg], errorMsg: errorMsg });
 	} catch (err) {
 		console.log("~~~~~~ERROR~~~~~~~~");
 		console.log(err.message);

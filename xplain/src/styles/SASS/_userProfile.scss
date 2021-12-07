@@ -1,4 +1,5 @@
 .user-profile{
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -6,16 +7,41 @@
 	min-height: 500px;
 	flex-direction: column;
 	row-gap: 30px;
-	border: 1px solid black;
-	border-radius: 45px;
-	padding: 20px 0px;
+	box-shadow:
+		0px 9.1px 5.7px rgba(0, 0, 0, 0.056),
+		0px 17.7px 14.3px rgba(0, 0, 0, 0.074),
+		0px 27.9px 29.2px rgba(0, 0, 0, 0.084),
+		0px 46.6px 60.2px rgba(0, 0, 0, 0.088),
+		0px 102px 165px rgba(0, 0, 0, 0.09)
+		;
+	border-radius: 50px;
+	padding: 40px 0px;
+
+	@media (max-width: $small-screen) {
+		width: 400px;
+	}
+	@media (max-width: $extra-small-screen) {
+		width: 350px;
+	}
+
+	.btn-cancel-edit{
+		color: rgb(190, 190, 190);
+		background: white;
+		position: absolute;
+		right: 30px;
+		top: 50px;
+		border: none;
+		font-size: 14px;
+		font-weight: 700;
+		
+		&:hover{
+			cursor: pointer;
+		}
+	}
 
 	.profile-photo{
-		display: flex;
-		justify-content: center;
-		border: 1px solid red;
-		height: 90px;
-		width: 90px;
+		width: 110px;
+		border-radius: 50%;
 	}
 
 	.user-info-list{
@@ -24,26 +50,46 @@
 		row-gap: 15px;
 		font-family: $font-ubuntu;
 		
-		
 		.user-info{
 			list-style: none;
-			border: 1px solid black;
+			border: 2px solid black;
 			border-radius: 10px;
-			padding: 15px 20px;
+			padding: 15px 10px;
 			width: 280px;
 			row-gap: 10px;
+			display: grid;
+			align-items: center;
+			grid-template-columns: 60px auto;
 			
 			.tag{
+				white-space: nowrap;
 				// border: 1px solid lightblue;
-				margin-right: 10px;
+				// margin-right: 15px;
 				font-size: 13px;
 				color: #636363;
 				font-weight: 700; 
+				@media (max-width: $small-screen) {
+					font-size: 10px;
+				}
 			}
+			.tag-name{padding-right: 5px;}
 			.data{
 				// border: 1px solid lightcoral;
 				font-weight: 700; 
 				font-size: 20px;
+				@media (max-width: $small-screen) {
+					font-size: 15px;
+				}
+			}
+
+			// This styling is for editData
+			input{
+				border: none;
+				display: inline;
+				font-weight: 700;
+				font-size: 20px;
+				outline: none;	
+				width: 100%;
 			}
 		}
 		
@@ -73,7 +119,8 @@
 		}
 
 		.liked-blogs{
-			text-align: center;
+			display: flex;
+			justify-content: center;
 			font-size: 15px;
 			font-weight: 700;
 
@@ -84,7 +131,6 @@
 	}
 
 	.action-btns{
-		
 		.btn-edit, .btn-logout{
 			width: 150px;
 			height: 40px;
@@ -97,7 +143,7 @@
 		}
 		
 		.btn-edit{
-			border: 1px solid black;
+			border: 2px solid black;
 			background-color: white;
 
 			// the & is the outer/parent selector
@@ -108,15 +154,34 @@
 
 		.btn-logout{
 			border: none;
-			background-color: #FF3C3C;
+			background-color: rgb(255, 60, 60);
 			color: white;
 
 			&:hover{
-				border: 1px solid #FF3C3C;
 				background-color: rgb(211, 0, 0);
 			}
 		}
-
 	}
-	
+}
+
+.user-not-found{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 400px;
+	height: 500px;
+	flex-direction: column;
+	row-gap: 30px;
+	// border: 2px solid black;
+	box-shadow:
+		0px 9.1px 5.7px rgba(0, 0, 0, 0.056),
+		0px 17.7px 14.3px rgba(0, 0, 0, 0.074),
+		0px 27.9px 29.2px rgba(0, 0, 0, 0.084),
+		0px 46.6px 60.2px rgba(0, 0, 0, 0.088),
+		0px 102px 165px rgba(0, 0, 0, 0.09)
+		;
+	border-radius: 50px;
+	padding: 40px 0px;
+	font-family: $font-ubuntu;
+	font-size: 20px;
 }

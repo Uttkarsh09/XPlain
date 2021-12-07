@@ -1,4 +1,3 @@
-@import "./_fonts";
 @import "./_variables";
 @import "./_home";
 @import "./login&signup";
@@ -6,6 +5,11 @@
 @import "./reactTagsStyle";
 @import "./editor";
 @import "./userProfile";
+@import "./mixins";
+@import "./blogLibrary";
+@import "./blog";
+@import "./utilities";
+@import "./loading";
 
 *{
 	padding: 0px;

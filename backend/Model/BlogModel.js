@@ -9,13 +9,11 @@ const schema = {
 	readingTime: { type: Number, min: 0, max: 120 },
 	title: { type: String },
 	views: { type: Number, default: 0 },
+	uploadDate: { type: Date },
 
 	// publishTime: { type: Number },
 	// comments_or_reactions: {}
-	// coverImage: Image,
-	// authorName: {
-	// 	type: String,
-	// }
+	// coverImage: Image
 };
 
 const requiredFields = [
