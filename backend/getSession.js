@@ -5,13 +5,13 @@ require("dotenv/config");
 const router = express.Router();
 
 router.use((req, res, next) => {
-	console.log(`Getting the session | PATH -> ${req.path}`);
+	console.log(`PATH -> ${req.method} ${req.path}`);
 	next();
 });
 
 router.use(
 	(_, __, next) => {
-		console.log("Accessing/Creating the session");
+		console.log("Accessing/Creating the session\n");
 		next();
 	},
 	session({

@@ -1,5 +1,6 @@
 import React from "react";
-import useChangeTitle from "./Utilities/useChangeTitle";
+import useChangeTitle from "./Hooks/useChangeTitle";
+import "../styles/CSS/home.css";
 // import "../styles/Home/home.css";
 
 function Home() {

@@ -10,6 +10,9 @@ import {
 } from "./Store/Slices/UserSlice";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import useEnvironmentVariables from "./Hooks/useEvnironmentVariables";
+import "../styles/CSS/editData.css";
+import { validateSignupFields } from "./Utilities/validation";
 
 // When editing the fields
 // send the axios request, change the global redux state, and redirect
@@ -23,7 +26,9 @@ function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 	const [inputName, setInputName] = useState(name);
 	const [inputUsername, setInputUsername] = useState(username);
 	const nameRef = useRef();
+	const usernameRef = useRef();
 	const history = useHistory();
+	const env_var = useEnvironmentVariables();
 
 	function onNameChange(e) {
 		setInputName(e.target.value);
@@ -46,33 +51,49 @@ function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 		} else if (name !== inputName) {
 			fieldsChanged.name = true;
 		}
+
+		const validationResult = validateSignupFields(name, username);
+		if (!validationResult.valid) {
+			toast.error(validationResult.message.toUpperCase());
+			if (validationResult.focusOn === "name") {
+				nameRef.current.focus();
+			} else if (validationResult.focusOn === "username") {
+				usernameRef.current.focus();
+			}
+			return;
+		}
+
 		axios
-			.put(`http://localhost:9000/user/update-data/${username}`, {
+			.put(`${env_var.REACT_APP_BACKEND_URL}/user/update-data/${username}`, {
 				username: inputUsername,
 				name: inputName,
 				fieldsChanged,
 			})
 			.then((res) => {
-				console.log(res.data.msg);
+				// console.log(res.data.msg);
 				toast.success("User data updated!");
 				const newProfilePicture = res.data.defaultProfilePhoto;
 
 				if (fieldsChanged.username === true) {
 					axios
-						.post("http://localhost:9000/logout", {}, { withCredentials: true })
-						.then((_) => console.log("LOGOUT SUCCESSFULL"))
+						.post(
+							`${env_var.REACT_APP_BACKEND_URL}/logout`,
+							{},
+							{ withCredentials: true }
+						)
+						// .then((_) => console.log("LOGOUT SUCCESSFULL"))
 						.catch((err) =>
 							console.log("There was an error while logging out after editing")
 						);
 
 					axios
 						.post(
-							"http://localhost:9000/user/login",
+							`${env_var.REACT_APP_BACKEND_URL}/user/login`,
 							{ username: inputUsername, bypassPassword: true },
 							{ withCredentials: true }
 						)
 						.then((res) => {
-							console.log("Logging in again....with a new session");
+							// console.log("Logging in again....with a new session");
 							dispatch(
 								addUserInfo({
 									userId: res.data.userId,
@@ -99,7 +120,7 @@ function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 
 	function onDeactivate() {
 		axios
-			.post(`http://localhost:9000/deactivate/${username}`)
+			.post(`${env_var.REACT_APP_BACKEND_URL}/deactivate/${username}`)
 			.then((res) => {
 				if (res.data.msg !== "USER_DELETED") {
 					console.log("USER NOT DELETED");
@@ -153,7 +174,12 @@ function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 				<li className="user-info username">
 					<span className="tag">UNAME :</span>
 					<span>
-						<input type="text" value={inputUsername} onChange={onUsrnmChange} />
+						<input
+							type="text"
+							value={inputUsername}
+							ref={usernameRef}
+							onChange={onUsrnmChange}
+						/>
 					</span>
 				</li>
 			</ul>

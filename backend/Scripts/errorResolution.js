@@ -10,6 +10,7 @@ const errorCodes = {
 	BLOG_NOT_UPLOADED: 9,
 	BLOG_NOT_UPDATED: 10,
 	USER_NOT_DELETED: 11,
+	NO_BLOGS_EXISTS: 12,
 };
 
 function sendErrorResponse(res, errorMsg, statusCode = 500) {

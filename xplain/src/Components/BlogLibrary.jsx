@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Loading from "./Loading";
 import axios from "axios";
 import { Eye, Clock } from "react-feather";
-import useChangeTitle from "./Utilities/useChangeTitle";
+import useChangeTitle from "./Hooks/useChangeTitle";
 import { Link } from "react-router-dom";
+import useEnvironmentVariables from "./Hooks/useEvnironmentVariables";
+import "../styles/CSS/blogLibrary.css";
 
-function getBlogBasicInfo(skip, limit) {
-	return axios.get("http://localhost:9000/blog/blog-basic-info/", {
+function getBlogBasicInfo(url, skip, limit) {
+	return axios.get(`${url}/blog/blog-basic-info/`, {
 		params: { skip: skip.current, limit },
 	});
 }
@@ -15,25 +17,30 @@ function BlogLibrary() {
 	const [blogs, setBlogs] = useState([]);
 	const skip = useRef(0);
 	const limit = 5;
+	const env_var = useEnvironmentVariables();
 
-	function loadMoreBlogs() {
-		getBlogBasicInfo(skip, limit)
+	const loadMoreBlogs = useCallback(() => {
+		getBlogBasicInfo(env_var.REACT_APP_BACKEND_URL, skip, limit)
 			.then((res) => {
 				skip.current = skip.current + limit;
 				const newB = res.data.blogs;
 				setBlogs((oldBlogs) => [...oldBlogs, ...newB]);
 			})
 			.catch((err) => {
+				console.log("IN HERE");
+				if (err.response.data.errorMsg === "NO_BLOGS_EXISTS") {
+					return <>NO BLOGS TO SHOW</>;
+				}
 				console.log("Err in Blog lib");
 				console.log(err);
 			});
-	}
+	}, [env_var.REACT_APP_BACKEND_URL]);
 
 	useChangeTitle("Blogs");
 
 	useEffect(() => {
 		loadMoreBlogs();
-	}, []);
+	}, [loadMoreBlogs]);
 
 	return (
 		<div>

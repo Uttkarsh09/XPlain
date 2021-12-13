@@ -13,16 +13,18 @@ import { Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUserInfo } from "./Components/Store/Slices/UserSlice";
 import { toast } from "react-toastify";
+import useEnvironmentVariables from "./Components/Hooks/useEvnironmentVariables";
 // import { UserProfileProvider } from "./Components/Context/UserProfileContext";
 
 function Routes() {
 	const dispatch = useDispatch();
 	const [userFound, setUserFound] = useState(false);
+	const env_var = useEnvironmentVariables();
 
 	useEffect(() => {
 		axios
 			.post(
-				"http://localhost:9000/login",
+				`${env_var.REACT_APP_BACKEND_URL}/login`,
 				{
 					/* No Data */
 				},
@@ -43,14 +45,13 @@ function Routes() {
 					console.log("Session not found");
 				} else {
 					toast.error("ERROR FROM ROUTES.JSX");
-					console.log("ERROR FROM ROUTES.JSX");
 					throw err;
 				}
 			})
 			.finally(() => {
 				setUserFound(true);
 			});
-	}, [dispatch, setUserFound]);
+	}, [dispatch, env_var.REACT_APP_BACKEND_URL, setUserFound]);
 
 	return (
 		<div>

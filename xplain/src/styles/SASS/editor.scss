@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 .editor-container{
 	// border: 1px solid rgb(0, 17, 255);
 	font-family: $font-roboto;
@@ -90,8 +92,8 @@
 
 		&:hover{
 			cursor: pointer;
-			background-color: rgb(151, 75, 3);
-			color: rgb(252, 212, 173);
+			background-color: rgb(207, 163, 121);
+			color: white;
 		}
 	}
 }

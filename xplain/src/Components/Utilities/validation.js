@@ -41,7 +41,7 @@ function validateLoginFields(username) {
 	return { valid: true };
 }
 
-function validateSignupFields(name, username, password) {
+function validateSignupFields(name, username, password = false) {
 	[name, username, password] = [name, username, password].map((field) =>
 		field.trim()
 	);
@@ -78,15 +78,15 @@ function validateSignupFields(name, username, password) {
 			focusOn: "username",
 		};
 	}
-
-	if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gim.test(password)) {
-		return {
-			valid: false,
-			message:
-				"Password should have minimum 8 characters, at least 1 letter and one number",
-			focusOn: "password",
-		};
-	}
+	
+	// if (password && /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gim.test(password)) {
+	// 	return {
+	// 		valid: false,
+	// 		message:
+	// 			"Password should have minimum 8 characters, at least 1 letter and one number",
+	// 		focusOn: "password",
+	// 	};
+	// }
 
 	return { valid: true };
 }

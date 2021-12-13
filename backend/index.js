@@ -13,11 +13,23 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cookeiParser());
 app.use(getSession);
 
-mongoose.connect(process.env.MONGO_CONNECTION_STRING, () => {
-	console.log("DB CONNECTED");
+mongoose.connect(process.env.MONGO_CONNECTION_STRING, (err) => {
+	if (err) {
+		console.log("ERROR WHILE CONNECTING TO DB");
+		console.log(err);
+	} else {
+		console.log("DB CONNECTED");
+	}
 });
 
-app.use(routeHandler);
+try {
+	app.use(routeHandler);
+} catch (err) {
+	console.log("THERE WAS SOME ERROR IN ONE OF THE ROUTES");
+	// mongoose.connection.close();
+	mongoose.disconnect();
+	console.log(err);
+}
 
 app.listen(process.env.PORT, () => {
 	console.log(

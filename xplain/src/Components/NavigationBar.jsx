@@ -2,8 +2,9 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { X, Menu } from "react-feather";
-import useUserInfo from "./Utilities/useUserInfo";
+import useUserInfo from "./Hooks/useUserInfo";
 import DisplaySvg from "./Utilities/DisplaySvg";
+import "../styles/CSS/navigationBar.css";
 
 function NavigationBar() {
 	const navMenuRef = useRef();
@@ -18,7 +19,7 @@ function NavigationBar() {
 	}
 
 	return (
-		<nav className="nav ">
+		<nav className="nav">
 			<Link to="/" className="nav__logo">
 				XPlain
 			</Link>

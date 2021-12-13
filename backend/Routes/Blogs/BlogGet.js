@@ -8,8 +8,6 @@ const { sendErrorResponse } = require("../../Scripts/errorResolution");
 
 router.get("/blog-basic-info", (req, res) => {
 	const { skip, limit } = req.query;
-	// console.log(`This is the skip = ${skip}`);
-	// console.log(`This is the limit = ${limit}`);
 	console.log("Retrieving blog posts");
 
 	BlogModel.find({})
@@ -27,11 +25,9 @@ router.get("/blog-basic-info", (req, res) => {
 		.exec()
 		.then((posts) => {
 			if (posts === []) {
-				res.json({ blogs: [], message: "no new blogs" });
+				// res.json({ blogs: [], message: "no new blogs" });
+				sendErrorResponse(res, "NO_BLOGS_EXISTS");
 			}
-			posts.map((post) => {
-				console.log(post.title);
-			});
 			res.json({
 				blogs: posts,
 			});
@@ -40,6 +36,7 @@ router.get("/blog-basic-info", (req, res) => {
 
 // If this route is kept above then the request is assumed to come at this endpoing
 // as it has a variable in the path so blog-basic-info is assumed as the blogId.
+// This is a small bug which can be easily fixed just by changing the route
 router.get("/:blogId", (req, res) => {
 	BlogModel.findOneAndUpdate(
 		{ _id: req.params.blogId },

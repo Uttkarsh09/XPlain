@@ -8,16 +8,19 @@ import { Link } from "react-router-dom";
 import { Clock, Calendar } from "react-feather";
 import { formatDate } from "./Utilities/validation";
 import DisplaySvg from "./Utilities/DisplaySvg";
+import useEnvironmentVariables from "./Hooks/useEvnironmentVariables";
+import "../styles/CSS/blog.css";
 
 function Blog({ match }) {
 	const [blogInfo, setBlogInfo] = useState(false);
 	const [_, setEditor] = useState(false);
 	const blogId = match.params.blogId;
 	const holder = "editorjs";
+	const env_var = useEnvironmentVariables();
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:9000/blog/${blogId}`)
+			.get(`${env_var.REACT_APP_BACKEND_URL}/blog/${blogId}`)
 			.then((res) => {
 				// console.log(res.data);
 				const editorConfig = new EditorJS({
@@ -35,8 +38,7 @@ function Blog({ match }) {
 				console.log("there was an error while asking for blog data");
 				console.log(err);
 			});
-		console.log("Request sent");
-	}, [blogId]);
+	}, [blogId, env_var.REACT_APP_BACKEND_URL]);
 
 	return blogInfo ? (
 		<BlogComponent holder={holder} {...blogInfo} />

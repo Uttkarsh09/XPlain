@@ -6,8 +6,10 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { validateSignupFields } from "./Utilities/validation";
 import Input from "./Utilities/Input";
-import useChangeTitle from "./Utilities/useChangeTitle";
-// import useUserInfo from "./Utilities/useUserInfo";
+import useChangeTitle from "./Hooks/useChangeTitle";
+import useEnvironmentVariables from "./Hooks/useEvnironmentVariables";
+import "../styles/CSS/loginSignup.css";
+// import useUserInfo from "./Hooks/useUserInfo";
 
 function Signup({ history }) {
 	// const user = useUserInfo(); // This is to be used to display and subscribe to the store data
@@ -15,6 +17,7 @@ function Signup({ history }) {
 	const usernameRef = useRef();
 	const passwordRef = useRef();
 	const nameRef = useRef();
+	const env_var = useEnvironmentVariables();
 
 	useChangeTitle("Signup");
 
@@ -30,7 +33,7 @@ function Signup({ history }) {
 		const name = nameRef.current.value;
 
 		const result = validateSignupFields(name, username, password);
-		if (!result.valid) {
+		if (!result.valid) {		
 			toast.error(result.message.toUpperCase());
 			if (result.focusOn === "name") {
 				nameRef.current.focus();
@@ -42,14 +45,16 @@ function Signup({ history }) {
 			return;
 		}
 
-		// IF THE COOKIES ARENT SET THEN AFTER SIGNING UP THE SEND THE REQUEST WITH THE CREDENTIALS
-		// Just like in the login component
 		axios
-			.post("http://localhost:9000/user/addNewUser", {
-				name,
-				username,
-				password,
-			})
+			.post(
+				`${env_var.REACT_APP_BACKEND_URL}/user/addNewUser`,
+				{
+					name,
+					username,
+					password,
+				},
+				{ withCredentials: true }
+			)
 			.then((res) => {
 				// console.log(res.data);
 				toast.success("Account created!");
@@ -64,10 +69,13 @@ function Signup({ history }) {
 				history.push(`/user-profile/${username}`);
 			})
 			.catch((err) => {
-				console.log("Error while siging up");
+				if (err.response.data.errorMsg === "USERNAME_ALREADY_PRESENT") {
+					toast.error("USERNAME ALREADY TAKEN");
+					usernameRef.current.focus();
+					return;
+				}
 				toast.error("ERROR WHILE SIGNING UP");
 				console.log(err.response);
-				// toast.error(err.response.data);
 			});
 	}
 

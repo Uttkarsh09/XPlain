@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+.home {
+  text-align: center;
+}
+.home .home-image {
+  width: 500px;
+  border: 1px solid black;
+  margin: 50px auto;
+  border-radius: 10px;
+}
+.home .home-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 80px;
+  max-width: 800px;
+  margin: 150px auto;
+  color: #333131;
+}
+.home .home-text .home-text::selection {
+  background-color: #3399FF;
+  color: white;
+}
+.home .home-text .gradient-text {
+  background-image: linear-gradient(90deg, red, blue);
+  background-clip: text;
+  color: transparent;
+}
+
+/*# sourceMappingURL=home.css.map */

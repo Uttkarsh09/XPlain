@@ -4,6 +4,7 @@
     $large: 992px;
     $extra-large: 1200px;
 */
+@import "./variables.scss";
 
 .blog-liberary{
     // border: 1px solid rebeccapurple;
@@ -127,14 +128,14 @@
         border: none;
         outline: none;
         border-radius: 500px;
-        background-color: lightskyblue;
+        background-color: #fcd2b4;
         padding: 10px 20px;
         font-weight: 700;
         margin-top: 50px;
 
         &:hover{
             cursor: pointer;
-            background-color: rgb(115, 198, 250);
+            background-color: #f8be95;
 
         }
     }

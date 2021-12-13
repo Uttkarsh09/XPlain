@@ -4,16 +4,19 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUserInfo } from "./Store/Slices/UserSlice";
 import Input from "./Utilities/Input";
-import useChangeTitle from "./Utilities/useChangeTitle";
+import useChangeTitle from "./Hooks/useChangeTitle";
 import { validateLoginFields } from "./Utilities/validation";
 import { toast } from "react-toastify";
+import useEnvironmentVariables from "./Hooks/useEvnironmentVariables";
+import "../styles/CSS/loginSignup.css";
 
 function Login({ history }) {
 	const usernameRef = useRef();
 	const passwordRef = useRef();
 	const dispatch = useDispatch();
+	const env_var = useEnvironmentVariables();
 
-	useChangeTitle("Signup");
+	useChangeTitle("Login");
 	useEffect(() => {
 		usernameRef.current.focus();
 	}, []);
@@ -32,7 +35,7 @@ function Login({ history }) {
 
 		axios
 			.post(
-				"http://localhost:9000/user/login",
+				`${env_var.REACT_APP_BACKEND_URL}/user/login`,
 				{
 					username,
 					password,

@@ -3,14 +3,15 @@ import React, { useState, useEffect, useRef } from "react";
 import EditorJS from "@editorjs/editorjs";
 import { EDITOR_JS_TOOLS, initialData } from "./editorTools";
 import uploadBlog from "./upload";
-import useUserInfo from "../Utilities/useUserInfo";
+import useUserInfo from "../Hooks/useUserInfo";
 import ReactTag from "./KeywordTags";
 import {
 	validateEditorFields,
 	addReadingTimeListener,
 } from "../Utilities/validation";
 import { toast } from "react-toastify";
-import useChangeTitle from "../Utilities/useChangeTitle";
+import useChangeTitle from "../Hooks/useChangeTitle";
+import "../../styles/CSS/editor.css";
 
 const Editor = ({ history }) => {
 	const [editor, setEditor] = useState();

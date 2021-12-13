@@ -31,6 +31,7 @@ const initialData = {
 					"Cover all the points to be xplained by the topic.",
 					"Use white spaces.",
 					"Read before publishing.",
+					"No spamming...",
 				],
 			},
 		},

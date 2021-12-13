@@ -7,6 +7,8 @@ import Routes from "./Routes";
 import "./styles/CSS/style.css";
 import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dotenv from "dotenv";
+dotenv.config();
 
 function App() {
 	return (
@@ -14,7 +16,7 @@ function App() {
 			<Provider store={store}>
 				<BrowserRouter>
 					<NavigationBar />
-					<Routes />
+					<Routes style={{ zIndex: 5 }} />
 				</BrowserRouter>
 				<ToastContainer
 					position="top-center"

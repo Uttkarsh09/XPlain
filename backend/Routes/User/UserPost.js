@@ -27,7 +27,8 @@ async function checkUserExists(req, res, next) {
 		password: 1,
 		username: 1,
 	});
-
+	console.log("IN CHECKUSEREXISTS");
+	console.log(info);
 	if (info) {
 		req.userExists = {
 			username: info.username,
@@ -57,7 +58,13 @@ router.post(
 	validateFields,
 	checkUserExists,
 	async (req, res) => {
-		if (req.userExists) sendErrorResponse(req, "USERNAME_ALREADY_PRESENT");
+		console.log(`USER EXISTS`);
+		console.log(req.userExists);
+		if (req.userExists) {
+			sendErrorResponse(res, "USERNAME_ALREADY_PRESENT");
+			return;
+		}
+		console.log("PASSED THE USERNAME CHECK");
 
 		const defaultProfilePhoto = await generateAvatar(req.body.username);
 		const user = new UserModel({ ...req.body, defaultProfilePhoto });
@@ -110,21 +117,21 @@ router.post("/login", async (req, res) => {
 	}
 });
 
-router.post("/userInfo/", async (req, res) => {
-	const username = req.body.username;
-	const userInfo = await UserModel.findOne({ username }).select({
-		name: 1,
-		followers: 1,
-		following: 1,
-		defaultProfilePhoto: 1,
-		_id: 0,
-	});
-	if (userInfo === null) {
-		sendErrorResponse(res, "USER_DOES_NOT_EXIST");
-	} else {
-		userInfo.username = username;
-		res.json(userInfo);
-	}
-});
+// router.post("/userInfo/", async (req, res) => {
+// 	const username = req.body.username;
+// 	const userInfo = await UserModel.findOne({ username }).select({
+// 		name: 1,
+// 		followers: 1,
+// 		following: 1,
+// 		defaultProfilePhoto: 1,
+// 		_id: 0,
+// 	});
+// 	if (userInfo === null) {
+// 		sendErrorResponse(res, "USER_DOES_NOT_EXIST");
+// 	} else {
+// 		userInfo.username = username;
+// 		res.json(userInfo);
+// 	}
+// });
 
 module.exports = router;

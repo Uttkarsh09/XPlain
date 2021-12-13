@@ -5,7 +5,6 @@ const BlogModel = require("../../Model/BlogModel");
 // All endpoints are after -> localhost:PORT/blogs/
 
 router.post("/post", async (req, res) => {
-	console.log("POST REQUEST RECIEVED");
 	const blogContent = {
 		authorId: req.body.authorId,
 		authorName: req.body.authorName,

@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+.nav {
+  background-color: #fcd2b4;
+  border-radius: 0px 0px 20px 20px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 10;
+  position: sticky;
+  top: 0;
+}
+.nav .nav__logo {
+  font-family: "Pacifico", cursive;
+  font-size: 25px;
+  letter-spacing: 1px;
+}
+.nav .open_nav_menu {
+  right: 0 !important;
+}
+.nav .nav__menu {
+  position: relative;
+}
+@media screen and (max-width: 767px) {
+  .nav .nav__menu {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100%;
+    padding: 50px 10px 10px;
+    transition: 0.4s;
+    z-index: 2;
+  }
+}
+.nav .nav__menu .nav__list {
+  list-style-type: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 300px;
+}
+@media screen and (max-width: 767px) {
+  .nav .nav__menu .nav__list {
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+  }
+}
+.nav .nav__menu .profile-photo {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 10%;
+}
+.nav .nav__menu .nav__close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .nav .nav__menu .nav__close {
+    display: block;
+  }
+}
+.nav .nav__toggle {
+  cursor: pointer;
+}
+@media screen and (min-width: 767px) {
+  .nav .nav__toggle {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=navigationBar.css.map */

@@ -1,0 +1,130 @@
+/*
+    $small: 600px;
+    $medium: 786px;
+    $large: 992px;
+    $extra-large: 1200px;
+*/
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+.blog-liberary {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.blog-liberary h1 {
+  margin-bottom: 30px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 70px;
+  text-align: center;
+}
+@media (max-width: 786px) {
+  .blog-liberary h1 {
+    font-size: 60px;
+  }
+}
+@media (max-width: 600px) {
+  .blog-liberary h1 {
+    margin-top: 20px;
+    font-size: 45px;
+  }
+}
+.blog-liberary .blogroll {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  word-wrap: break-word;
+  flex-direction: row;
+  justify-content: space-evenly;
+  row-gap: 10px;
+}
+.blog-liberary .blogroll .blog-block {
+  border-radius: 10px;
+  width: 350px;
+  min-height: 100px;
+  position: relative;
+  font-family: "Ubuntu", sans-serif;
+  padding: 10px;
+  background-color: #ffffff;
+  transition: 0.1s ease-in-out background-color;
+  box-shadow: 6.3px 7.2px 6.8px rgba(0, 0, 0, 0.18), 46px 53px 54px rgba(0, 0, 0, 0.09);
+}
+.blog-liberary .blogroll .blog-block:hover {
+  background-color: #fdf4f4;
+}
+@media (max-width: 786px) {
+  .blog-liberary .blogroll .blog-block {
+    height: 30px;
+    width: 85%;
+  }
+}
+@media (max-width: 600px) {
+  .blog-liberary .blogroll .blog-block {
+    width: 100%;
+  }
+}
+.blog-liberary .blogroll .blog-block .blog-title {
+  font-size: 16px;
+  left: 20px;
+  top: 20px;
+}
+@media (max-width: 786px) {
+  .blog-liberary .blogroll .blog-block .blog-title {
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .blog-liberary .blogroll .blog-block .blog-title {
+    font-size: 16px;
+  }
+}
+@media (max-width: 400px) {
+  .blog-liberary .blogroll .blog-block .blog-title {
+    font-size: 16px;
+  }
+}
+.blog-liberary .blogroll .blog-block .blog-author {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 5px;
+  padding-right: 5px;
+  color: #6b6b6b;
+  font-size: 14px;
+}
+@media (max-width: 400px) {
+  .blog-liberary .blogroll .blog-block .blog-author {
+    font-size: 14px;
+  }
+}
+.blog-liberary .blogroll .blog-block .blog-stats {
+  color: #6b6b6b;
+  font-weight: 500;
+  display: flex;
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+}
+.blog-liberary .blogroll .blog-block .blog-stats span {
+  margin-right: 10px;
+}
+.blog-liberary .blogroll .blog-block .blog-stats span .icon {
+  position: relative;
+  top: 1px;
+}
+.blog-liberary button {
+  border: none;
+  outline: none;
+  border-radius: 500px;
+  background-color: #fcd2b4;
+  padding: 10px 20px;
+  font-weight: 700;
+  margin-top: 50px;
+}
+.blog-liberary button:hover {
+  cursor: pointer;
+  background-color: #f8be95;
+}
+
+/*# sourceMappingURL=blogLibrary.css.map */

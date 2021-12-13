@@ -8,25 +8,26 @@ import { useDispatch } from "react-redux";
 import DisplaySvg from "./Utilities/DisplaySvg";
 import { AlertCircle } from "react-feather";
 import EditData from "./EditData";
-import useUserInfo from "./Utilities/useUserInfo";
+import useUserInfo from "./Hooks/useUserInfo";
 import { toast } from "react-toastify";
+import useEnvironmentVariables from "./Hooks/useEvnironmentVariables";
+import "../styles/CSS/userProfile.css";
 
 function UserProfile({ match }) {
 	const username = match.params.username;
 	const [user, setUser] = useState(false);
 	const [editUserData, setEditUserData] = useState(false);
+	const env_var = useEnvironmentVariables();
 
 	useEffect(() => {
 		axios
-			.post("http://localhost:9000/user/userInfo/", {
-				username,
-			})
+			.get(`${env_var.REACT_APP_BACKEND_URL}/user/userInfo/${username}`)
 			.then((res) => {
 				res = res.data;
 				setUser(res);
 			})
 			.catch((err) => {
-				console.log(err.response);
+				// console.log(err.response.data);
 				if (err.response.data.errorMsg === "USER_DOES_NOT_EXIST") {
 					// console.log(err.response.data);
 					setUser("USER_DOES_NOT_EXIST");
@@ -35,7 +36,7 @@ function UserProfile({ match }) {
 					console.log(err);
 				}
 			});
-	}, [username]);
+	}, [env_var.REACT_APP_BACKEND_URL, username]);
 
 	return (
 		<>
@@ -67,6 +68,7 @@ function Profile({
 	const dispatch = useDispatch();
 	let profilePhoto = "";
 	const userCanEdit = user.username === username; // user.username is the logged-in username and other is the searched one
+	const env_var = useEnvironmentVariables();
 	if (userCanEdit) {
 		profilePhoto = user.profilePhoto;
 	} else {
@@ -75,7 +77,11 @@ function Profile({
 
 	function logout() {
 		axios
-			.post("http://localhost:9000/logout", {}, { withCredentials: true })
+			.post(
+				`${env_var.REACT_APP_BACKEND_URL}/logout`,
+				{},
+				{ withCredentials: true }
+			)
 			.then((_) => {
 				console.log("Removing user info from redux state");
 				dispatch(removeUserInfo());
@@ -112,7 +118,7 @@ function Profile({
 					<span className="data">{username}</span>
 				</li>
 
-				<li className="follow-info user-info">
+				{/* <li className="follow-info user-info">
 					<div className="follow-head">
 						<div className="follow-text">FOLLOWERS</div>
 						<div className="follow-data">{followers}</div>
@@ -122,7 +128,7 @@ function Profile({
 						<div className="follow-text">FOLLOWING</div>
 						<div className="follow-data">{following}</div>
 					</div>
-				</li>
+				</li> */}
 				<li
 					className="user-info liked-blogs"
 					onClick={() => toast.warn("This feature is currently unavailable")}

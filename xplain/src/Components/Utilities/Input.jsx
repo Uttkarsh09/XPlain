@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/CSS/utilities.css";
 
 const Input = React.forwardRef((props, ref) => {
 	const { children, className, type, name, required } = props;

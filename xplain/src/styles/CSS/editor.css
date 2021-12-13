@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+.editor-container {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0px;
+}
+.editor-container .editor-inputs {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  padding: 10px;
+}
+.editor-container .editor-inputs .blog-title-input {
+  text-align: center;
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+  word-spacing: 2px;
+  font-size: 40px;
+  font-weight: 700;
+  outline: none;
+  border-radius: 5px;
+  width: 80%;
+  min-height: 61px;
+  border: 2px solid black;
+  overflow-x: hidden;
+  overflow-y: auto;
+  resize: vertical;
+}
+.editor-container .editor-inputs .blog-title-input .blog-title-input::placeholder {
+  color: #a5a4a4;
+}
+@media (max-width: 600px) {
+  .editor-container .editor-inputs .blog-title-input {
+    width: 95%;
+    font-size: 27px;
+  }
+}
+.editor-container .editor-inputs .reading-time-input {
+  outline: none;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 2px;
+  width: 5.5%;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+@media (max-width: 600px) {
+  .editor-container .editor-inputs .reading-time-input {
+    width: 6%;
+  }
+}
+.editor-container .editor-inputs .reading-time-input::-webkit-outer-spin-button,
+.editor-container .editor-inputs .reading-time-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.editor-container .editor {
+  border: 1px solid black;
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 80%;
+  padding: 20px;
+}
+@media (max-width: 600px) {
+  .editor-container .editor {
+    width: 95%;
+    padding: 10px;
+  }
+}
+.editor-container .btn-submit {
+  padding: 15px 35px;
+  color: #974b03;
+  border: none;
+  background-color: #fcd4ad;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 100px;
+  margin: 40px;
+}
+.editor-container .btn-submit:hover {
+  cursor: pointer;
+  background-color: #cfa379;
+  color: white;
+}
+
+/*# sourceMappingURL=editor.css.map */

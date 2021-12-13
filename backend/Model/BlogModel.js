@@ -26,4 +26,4 @@ const requiredFields = [
 ];
 
 const blogSchema = new mongoose.Schema(createSchema(schema, requiredFields));
-module.exports = mongoose.model("blogs", blogSchema);
+module.exports = mongoose.model("blog", blogSchema);

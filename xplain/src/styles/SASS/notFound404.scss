@@ -1,0 +1,24 @@
+@import "./variables";
+
+.not-found-container{
+    display: flex;
+    height: calc(100vh - $nav-bar-height);
+    flex-direction: column;
+    align-items: center;
+    font-family: $font-roboto;
+    margin-top: 100px;
+
+    .title{
+        font-size: 50px;
+        font-size: 1000;
+        
+        @media (max-width: $small-screen){
+            font-size: 30px;   
+        }
+    }
+
+    .link{
+        text-decoration: underline;
+    }
+
+}
