@@ -6,6 +6,7 @@ import useChangeTitle from "./Hooks/useChangeTitle";
 import { Link } from "react-router-dom";
 import useEnvironmentVariables from "./Hooks/useEvnironmentVariables";
 import "../styles/CSS/blogLibrary.css";
+import {AlertCircle} from "react-feather";
 
 function getBlogBasicInfo(url, skip, limit) {
 	return axios.get(`${url}/blog/blog-basic-info/`, {
@@ -15,24 +16,24 @@ function getBlogBasicInfo(url, skip, limit) {
 
 function BlogLibrary() {
 	const [blogs, setBlogs] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const skip = useRef(0);
 	const limit = 5;
 	const env_var = useEnvironmentVariables();
 
+	// useCallback is used to cache the function.
 	const loadMoreBlogs = useCallback(() => {
 		getBlogBasicInfo(env_var.REACT_APP_BACKEND_URL, skip, limit)
 			.then((res) => {
 				skip.current = skip.current + limit;
-				const newB = res.data.blogs;
-				setBlogs((oldBlogs) => [...oldBlogs, ...newB]);
+				const newBlogs = res.data.blogs;
+				setBlogs((oldBlogs) => [...oldBlogs, ...newBlogs]);
+				setLoading(false);
 			})
 			.catch((err) => {
-				console.log("IN HERE");
 				if (err.response.data.errorMsg === "NO_BLOGS_EXISTS") {
-					return <>NO BLOGS TO SHOW</>;
+					setLoading(false);
 				}
-				console.log("Err in Blog lib");
-				console.log(err);
 			});
 	}, [env_var.REACT_APP_BACKEND_URL]);
 
@@ -44,7 +45,7 @@ function BlogLibrary() {
 
 	return (
 		<div>
-			{!blogs.length ? (
+			{loading ? (
 				<Loading />
 			) : (
 				<BlogLibraryContent loadMoreBlogs={loadMoreBlogs} blogs={blogs} />
@@ -57,12 +58,24 @@ function BlogLibraryContent({ blogs, loadMoreBlogs }) {
 	return (
 		<div className="blog-liberary container">
 			<h1>Recent Blogs</h1>
-			<div className="blogroll">
-				{blogs.map((blog) => {
-					return <BlogView key={blog._id} {...blog} />;
-				})}
-			</div>
-			<button onClick={loadMoreBlogs}>Load More</button>
+			{blogs.length === 0 && <div className="no-blogs">
+				<div>
+					NO BLOGS FOUND
+				</div>
+				<div>
+					<AlertCircle size="50" color="red" style={{marginTop: "20px"}} />
+				</div>
+			</div>}
+			{blogs.length !== 0 && (
+				<>
+					<div className="blogroll">
+						{blogs.map((blog) => {
+							return <BlogView key={blog._id} {...blog} />;
+						})}
+					</div>
+					<button onClick={loadMoreBlogs}>Load More</button>
+				</>
+			)}
 		</div>
 	);
 }

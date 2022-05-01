@@ -24,13 +24,14 @@ router.get("/blog-basic-info", (req, res) => {
 		.lean()
 		.exec()
 		.then((posts) => {
-			if (posts === []) {
+			if (posts.length === 0) {
 				// res.json({ blogs: [], message: "no new blogs" });
 				sendErrorResponse(res, "NO_BLOGS_EXISTS");
+			} else {
+				res.json({
+					blogs: posts,
+				});
 			}
-			res.json({
-				blogs: posts,
-			});
 		});
 });
 
