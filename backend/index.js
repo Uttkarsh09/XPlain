@@ -36,3 +36,9 @@ app.listen(process.env.PORT, () => {
 		`server listeneng on port ${process.env.PORT} http://localhost:${process.env.PORT}`
 	);
 });
+
+process.on("SIGINT", ()=>{
+	console.log("\nDISCONNECTING\n");
+	mongoose.disconnect();
+	process.exit();
+})

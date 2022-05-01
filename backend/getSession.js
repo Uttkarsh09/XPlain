@@ -17,7 +17,7 @@ router.use(
 	session({
 		store: MongoStore.create({
 			mongoUrl: process.env.MONGO_CONNECTION_STRING,
-			ttl: 1000 * 60 * 60 * 24 * 3, //Default 14 days
+			ttl: 1000 * 60 * 60 * 24 * 3, // current 3 days - Default 14 days
 			collectionName: "sessions",
 		}),
 		name: "XPlainSessionID",
@@ -25,7 +25,7 @@ router.use(
 		saveUninitialized: false,
 		resave: false,
 		cookie: {
-			maxAge: 1000 * 60 * 60 * 24 * 3,
+			maxAge: 1000 * 60 * 60 * 24 * 3,	// current 3 days
 			httpOnly: false,
 			secure: false,
 			path: "/", // Default
