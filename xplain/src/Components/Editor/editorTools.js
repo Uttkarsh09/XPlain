@@ -2,13 +2,14 @@ import CheckList from "@editorjs/checklist";
 import Embed from "@editorjs/embed";
 import Header from "@editorjs/header";
 import InlineCode from "@editorjs/inline-code";
-import Link from "@editorjs/link";
+import LinkTool from "@editorjs/link";
 import List from "@editorjs/list";
 import Marker from "@editorjs/marker";
 import Paragraph from "@editorjs/paragraph";
 import SimpleImage from "@editorjs/simple-image";
 import Table from "@editorjs/table";
 import Underline from "@editorjs/underline";
+
 
 const initialData = {
 	time: 1638893109039,
@@ -47,9 +48,12 @@ export const EDITOR_JS_TOOLS = {
 		class: List,
 		inlineToolbar: true,
 	},
-	link: {
-		class: Link,
+	linkTool: {
+		class: LinkTool,
 		inlineToolbar: true,
+		config: {
+			endpoint: `${process.env.REACT_APP_BACKEND_URL}/editorJS/link`,
+		}
 	},
 	underline: {
 		class: Underline,
