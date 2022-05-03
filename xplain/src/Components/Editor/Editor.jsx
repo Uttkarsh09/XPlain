@@ -74,7 +74,7 @@ const Editor = ({ history }) => {
 			autofocus: false,
 			tools: EDITOR_JS_TOOLS,
 			data: initialData,
-			logLevel: "INFO",
+			logLevel: "VERBOSE",
 		});
 		setEditor(editorConfig);
 		addReadingTimeListener();
