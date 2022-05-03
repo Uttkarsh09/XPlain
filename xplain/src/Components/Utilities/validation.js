@@ -42,9 +42,10 @@ function validateLoginFields(username) {
 }
 
 function validateSignupFields(name, username, password = false) {
-	[name, username, password] = [name, username, password].map((field) =>
-		field.trim()
-	);
+	[name, username, password] = [name, username, password].map((field) => {
+		if(field) return field.trim();
+		return field;
+	});
 
 	if (name.length < 8) {
 		return {
@@ -78,7 +79,7 @@ function validateSignupFields(name, username, password = false) {
 			focusOn: "username",
 		};
 	}
-	
+
 	// if (password && /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gim.test(password)) {
 	// 	return {
 	// 		valid: false,

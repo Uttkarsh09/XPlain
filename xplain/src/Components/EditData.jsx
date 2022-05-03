@@ -8,6 +8,7 @@ import {
 	removeUserInfo,
 	addUserInfo,
 } from "./Store/Slices/UserSlice";
+import useUserInfo from "./Hooks/useUserInfo";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import useEnvironmentVariables from "./Hooks/useEvnironmentVariables";
@@ -21,6 +22,7 @@ import { validateSignupFields } from "./Utilities/validation";
 
 function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 	name = name.trim();
+	const {userId} = useUserInfo();
 	const dispatch = useDispatch();
 	const profilePhoto = defaultProfilePhoto;
 	const [inputName, setInputName] = useState(name);
@@ -42,6 +44,7 @@ function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 	}, []);
 
 	function onSave() {
+		// VALIDATION
 		const fieldsChanged = { username: false, name: false };
 		if (name === inputName && inputUsername === username) {
 			toast.warn("No field is edited");
@@ -52,6 +55,7 @@ function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 			fieldsChanged.name = true;
 		}
 
+		// VERIFICATION
 		const validationResult = validateSignupFields(name, username);
 		if (!validationResult.valid) {
 			toast.error(validationResult.message.toUpperCase());
@@ -63,16 +67,18 @@ function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 			return;
 		}
 
+		// UPDATION
 		axios
 			.put(`${env_var.REACT_APP_BACKEND_URL}/user/update-data/${username}`, {
 				username: inputUsername,
 				name: inputName,
+				userId: userId,
+				defaultProfilePhoto: profilePhoto,
 				fieldsChanged,
 			})
 			.then((res) => {
-				// console.log(res.data.msg);
 				toast.success("User data updated!");
-				const newProfilePicture = res.data.defaultProfilePhoto;
+				// const newProfilePicture = res.data.defaultProfilePhoto;
 
 				if (fieldsChanged.username === true) {
 					axios
@@ -81,7 +87,7 @@ function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 							{},
 							{ withCredentials: true }
 						)
-						// .then((_) => console.log("LOGOUT SUCCESSFULL"))
+						.then((_) => console.log("LOGOUT SUCCESSFULL"))
 						.catch((err) =>
 							console.log("There was an error while logging out after editing")
 						);
@@ -93,12 +99,12 @@ function EditData({ defaultProfilePhoto, name, username, setEditUserData }) {
 							{ withCredentials: true }
 						)
 						.then((res) => {
-							// console.log("Logging in again....with a new session");
+							console.log("Logging in again....with a new session");
 							dispatch(
-								addUserInfo({
+								updateUserInfo({
 									userId: res.data.userId,
 									username: res.data.username,
-									profilePhoto: newProfilePicture,
+									profilePhoto: profilePhoto,
 								})
 							);
 							setEditUserData(false);
