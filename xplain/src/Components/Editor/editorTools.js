@@ -1,18 +1,20 @@
 import CheckList from "@editorjs/checklist";
-import Embed from "@editorjs/embed";
+// import Embed from "@editorjs/embed";
 import Header from "@editorjs/header";
 import InlineCode from "@editorjs/inline-code";
 import LinkTool from "@editorjs/link";
-import List from "@editorjs/list";
 import Marker from "@editorjs/marker";
-import Paragraph from "@editorjs/paragraph";
+// import Paragraph from "@editorjs/paragraph";
 import SimpleImage from "@editorjs/simple-image";
 import Table from "@editorjs/table";
 import Underline from "@editorjs/underline";
-
+import CodeTool from "@editorjs/code";
+import Alert from "editorjs-alert";
+import NestedList from "@editorjs/nested-list";			// Addon to @editorjs/list
+const Paragraph = require("editorjs-paragraph-with-alignment");
 
 const initialData = {
-	time: 1638893109039,
+	time: 1651425477874,
 	blocks: [
 		{
 			id: "Be74ezWlbK",
@@ -28,78 +30,100 @@ const initialData = {
 			data: {
 				style: "ordered",
 				items: [
-					"Keep it simple.",
-					"Cover all the points to be xplained by the topic.",
-					"Use white spaces.",
-					"Read before publishing.",
-					"No spamming...",
+					{
+						content: "Keep it simple.",
+						items: [],
+					},
+					{
+						content: "Cover all the points to be xplained by the topic.",
+						items: [],
+					},
+					{
+						content: "Use white spaces.",
+						items: [],
+					},
+					{
+						content: "Read before publishing.",
+						items: [],
+					},
+					{
+						content: "No spamming...",
+						items: [],
+					},
 				],
 			},
 		},
 	],
-	version: "2.22.2",
+	version: "2.23.2",
 };
 
 export { initialData };
 
 export const EDITOR_JS_TOOLS = {
-	// image: Image,
-	list: {
-		class: List,
+	list: {							// WORKING
+		class: NestedList,
 		inlineToolbar: true,
 	},
-	linkTool: {
+	linkTool: {						// WORKING
 		class: LinkTool,
 		inlineToolbar: true,
 		config: {
 			endpoint: `${process.env.REACT_APP_BACKEND_URL}/editorJS/link`,
-		}
+		},
 	},
-	underline: {
+	underline: {					// WORKING
 		class: Underline,
 		inlineToolbar: true,
 	},
-	checklist: {
+	checklist: {					// WORKING
 		class: CheckList,
 		inlineToolbar: true,
 	},
-	inlineCode: {
+	inlineCode: {					// WORKING
 		class: InlineCode,
 		inlineToolbar: true,
 	},
-	simpleImage: {
-		class: SimpleImage,
-		inlineToolbar: true,
-	},
-	table: {
+	marker: Marker, 				// WORKING
+	table: {						// WORKING
+		
 		class: Table,
 		inlineToolbar: true,
 	},
-	paragraph: {
+	code: CodeTool, 				// WORKING
+	alert: {						// WORKING
+		class: Alert,
+		inlineToolbar: true,
+		shortcut: "CMD+SHIFT+A",
+		config: {
+			defaultType: "primary",
+			messagePlaceholder: "Enter something",
+		},
+	},
+	simpleImage: SimpleImage, 		// NOT WORKING
+	paragraph: {					// NOT WORKING
 		class: Paragraph,
 		inlineToolbar: true,
 	},
-	marker: Marker,
-	header: {
+	header: {						// CHECK
 		class: Header,
 		inlineToolbar: true,
 	},
-	embed: {
-		class: Embed,
-		inlineToolbar: true,
-		config: {
-			services: {
-				youtube: true,
-				codepen: true,
-				imgur: true,
-				twitch: true,
-				vimeo: true,
-				vine: true,
-				twitter: true,
-				instagram: true,
-				facebook: true,
-				pinterest: true,
-			},
-		},
-	},
+	// embed: {
+	// 	class: Embed,
+	// 	inlineToolbar: true,
+	// 	config: {
+	// 		services: {
+	// 			youtube: true,
+	// 			codepen: true,
+	// 			imgur: true,
+	// 			twitch: true,
+	// 			vimeo: true,
+	// 			vine: true,
+	// 			twitter: true,
+	// 			instagram: true,
+	// 			facebook: true,
+	// 			pinterest: true,
+	// 		},
+	// 	},
+	// },
 };
